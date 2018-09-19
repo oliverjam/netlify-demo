@@ -6,6 +6,7 @@ const Home = () => (
     <Link to="/">Home</Link>
     <Link to="/identity">Identity</Link>
     <Link to="/functions">Functions</Link>
+    <Link to="/auth-functions">Authenticated Functions</Link>
   </nav>
 );
 

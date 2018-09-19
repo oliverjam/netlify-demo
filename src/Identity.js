@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import netlifyIdentity from 'netlify-identity-widget';
 
-class App extends Component {
+class Identity extends Component {
   state = { loading: false, user: null };
 
   componentDidMount() {
@@ -41,4 +41,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Identity;

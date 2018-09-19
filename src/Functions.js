@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import netlifyIdentity from 'netlify-identity-widget';
 
-class App extends Component {
+class Functions extends Component {
   state = { loading: false, todos: [] };
 
   componentDidMount() {
@@ -28,4 +28,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Functions;
