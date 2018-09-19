@@ -11,7 +11,8 @@ class Functions extends Component {
   getTodos = () =>
     fetch('/.netlify/functions/getTodos')
       .then(res => res.json())
-      .then(({ todos }) => this.setState({ loading: false, todos }));
+      .then(({ todos }) => this.setState({ loading: false, todos }))
+      .catch(console.error);
 
   render() {
     const { loading, todos } = this.state;

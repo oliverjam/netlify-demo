@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import netlifyIdentity from 'netlify-identity-widget';
 
 class AuthFunctions extends Component {
-  state = { loading: false, user: null };
+  state = { loading: true, user: null, todos: [] };
 
   componentDidMount() {
     netlifyIdentity.init();
@@ -31,7 +31,8 @@ class AuthFunctions extends Component {
   getTodos = () =>
     fetch('/.netlify/functions/getTodos')
       .then(res => res.json())
-      .then(({ todos }) => this.setState({ loading: false, todos }));
+      .then(({ todos }) => this.setState({ loading: false, todos }))
+      .catch(console.error);
 
   render() {
     const { loading, user, todos } = this.state;
