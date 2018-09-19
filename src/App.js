@@ -1,17 +1,19 @@
 import React from 'react';
 import { Router } from '@reach/router';
-import Home from './Home';
+import Nav from './Nav';
 import Identity from './Identity';
 import Functions from './Functions';
 import AuthFunctions from './AuthFunctions';
 
 const App = () => (
-  <Router>
-    <Home path="/" />
-    <Identity path="/identity" />
-    <Functions path="/functions" />
-    <AuthFunctions path="/auth-functions" />
-  </Router>
+  <div>
+    <Nav />
+    <Router>
+      <Identity path="/" />
+      <Functions path="/functions" />
+      <AuthFunctions path="/auth-functions" />
+    </Router>
+  </div>
 );
 
 export default App;
