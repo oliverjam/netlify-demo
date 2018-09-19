@@ -7,7 +7,10 @@ class AuthFunctions extends Component {
   componentDidMount() {
     netlifyIdentity.init();
     const user = netlifyIdentity.currentUser();
-    if (user) this.setState({ user });
+    if (user) {
+      this.setState({ user });
+      this.getTodos();
+    }
     netlifyIdentity.on('login', user => {
       this.setState({ user }, () => {
         netlifyIdentity.close();
@@ -29,10 +32,25 @@ class AuthFunctions extends Component {
   };
 
   getTodos = () =>
-    fetch('/.netlify/functions/getTodos')
-      .then(res => res.json())
-      .then(({ todos }) => this.setState({ loading: false, todos }))
-      .catch(console.error);
+    this.generateHeaders().then(headers =>
+      fetch('/.netlify/functions/authGetTodos', { headers })
+        .then(res => res.json())
+        .then(({ todos }) => this.setState({ loading: false, todos }))
+        .catch(console.error)
+    );
+
+  generateHeaders = () => {
+    const headers = { 'Content-Type': 'application/json' };
+    if (netlifyIdentity.currentUser()) {
+      return netlifyIdentity
+        .currentUser()
+        .jwt()
+        .then(token => {
+          return { ...headers, Authorization: `Bearer ${token}` };
+        });
+    }
+    return Promise.resolve(headers);
+  };
 
   render() {
     const { loading, user, todos } = this.state;
