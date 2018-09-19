@@ -9,8 +9,14 @@ const db = {
 
 export function handler(event, context, callback) {
   console.log(event);
-  const { identity, user } = context.clientContext;
-  const { email } = user;
+  const { identity, user } = context.clientContext || {};
+  const { email } = user || {};
+  if (!db[email]) {
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify({ todos: ["You don't have any todos"] }),
+    });
+  }
   callback(null, {
     statusCode: 200,
     body: JSON.stringify({ todos: db[email].todos }),
